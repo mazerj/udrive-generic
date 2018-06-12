@@ -5,10 +5,15 @@ either the original Arduino Motorshield R3 or the Adafruit Motorshield
 V2 based on a compile time flag. Define R3 for R3, otherwise defaults
 to Adafruit driver.
 
+This is intended to control a National Aperature MM-series linear
+actuator. But in theory, should work with any DC motor-based
+actuator with an rotary encoder attached. COUNTS_PER_REV will
+need to be adjusted as well.
+
 ### Requires:
 
-- uno
-- arduino-brand motor shield R3 *OR* adafruit motor shield V2 
+- Arduino UNO
+- Arduino-brand motor shield R3 *OR* Adafruit motor shield V2.x
 - adafruit color lcd shield
 - 2 pots
 - assorted connectors etc..
