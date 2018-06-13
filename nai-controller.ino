@@ -8,7 +8,7 @@
 
 
 // R3 for old-style original Arduino Motor Shield R3 (otherwise, Adafruit V2)
-#define R3	1
+//#define R3	1
 
 #include <Wire.h>			// built-in library
 #include <Adafruit_RGBLCDShield.h>	// adafruit lcd shield
@@ -28,8 +28,7 @@
 #define COUNTS_PER_UM	2.0157		// MM-3M-F 16:1: 51,200 counts/inch
 
 //#define SLEEPAFTER	0		// never sleep backlight
-//#define SLEEPAFTER	(1000*60*5)      // sleep after 5 mins
-#define SLEEPAFTER	(1000*10)
+#define SLEEPAFTER	(1000*60*5)    // sleep after 5 mins
 
 Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 #ifdef R3
@@ -55,16 +54,25 @@ void setup(void)
   lcd.clear();
   lcd.setBacklight(WHITE);
   lcdon = 1;
+
+  lcd.setCursor(0,0);
+  lcd.print("NAI-Controller");
+  lcd.setCursor(0,1);
+  
 #ifdef R3
   motor.run(BRAKE);
   motor.setSpeed(0);
+  lcd.print("old R3 mtr shld");
 #else
   AFMS.begin();
   motor->run(RELEASE);
   motor->setSpeed(0);
+  lcd.print("adafr mtr shld");
 #endif
   // retrieve saved encoder position
   myEnc.write(EEPROM.readLong(0));
+  delay(1000);
+  lcd.clear();
 }
 
 // speed to normalized velocity (0-9)
